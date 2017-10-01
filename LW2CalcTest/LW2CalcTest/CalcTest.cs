@@ -12,6 +12,7 @@ namespace LW2CalcTest
         private double _doubleMaxValue = double.MaxValue;
         private double _doubleMinValue = double.MinValue;
         private double _doubleTen = 10.0;
+        private double _doubleTwoDotFive = 2.5;
         private double _result;
 
         #endregion
@@ -82,6 +83,41 @@ namespace LW2CalcTest
         {
             _result = Calculator.Minus(_doubleTenNegative, _doubleTen);
             Assert.AreEqual(-20.0, _result);
+        }
+
+        #endregion
+
+        #region TestDivide
+
+        [Test]
+        public void TestDivMaxAndMinValue()
+        {
+            _result = Calculator.Divide(_doubleMaxValue, _doubleMinValue);
+            Assert.AreEqual(-1.0, _result);
+        }
+        [Test]
+        public void TestDivMinAndMinValue()
+        {
+            _result = Calculator.Divide(_doubleMinValue, _doubleMinValue);
+            Assert.AreEqual(1.0, _result);
+        }
+        [Test]
+        public void TestDivTenAndTwoDotFive()
+        {
+            _result = Calculator.Divide(_doubleTen, _doubleTwoDotFive);
+            Assert.AreEqual(4.0, _result);
+        }
+        [Test]
+        public void TestDivTwoDotFiveAndTen()
+        {
+            _result = Calculator.Divide(_doubleTwoDotFive, _doubleTen);
+            Assert.AreEqual(0.25,_result);
+        }
+        [Test]
+        public void TestDivTenNegativeAndTwoDotFive()
+        {
+            _result = Calculator.Divide(_doubleTenNegative, _doubleTwoDotFive);
+            Assert.AreEqual(-4.0,_result);
         }
 
         #endregion
