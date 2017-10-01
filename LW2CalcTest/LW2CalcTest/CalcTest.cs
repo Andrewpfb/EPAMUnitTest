@@ -111,13 +111,48 @@ namespace LW2CalcTest
         public void TestDivTwoDotFiveAndTen()
         {
             _result = Calculator.Divide(_doubleTwoDotFive, _doubleTen);
-            Assert.AreEqual(0.25,_result);
+            Assert.AreEqual(0.25, _result);
         }
         [Test]
         public void TestDivTenNegativeAndTwoDotFive()
         {
             _result = Calculator.Divide(_doubleTenNegative, _doubleTwoDotFive);
-            Assert.AreEqual(-4.0,_result);
+            Assert.AreEqual(-4.0, _result);
+        }
+
+        #endregion
+
+        #region TestMultiply
+
+        [Test]
+        public void TestMultTenAndTenNegative()
+        {
+            _result = Calculator.Multiply(_doubleTen, _doubleTenNegative);
+            Assert.AreEqual(-100.0, _result);
+        }
+        [Test]
+        public void TestMultTenAndTwoDotFive()
+        {
+            _result = Calculator.Multiply(_doubleTen, _doubleTwoDotFive);
+            Assert.AreEqual(25.0,_result);
+        }
+        [Test]
+        public void TestMultMaxAndMinValue()
+        {
+            _result = Calculator.Multiply(_doubleMaxValue, _doubleMinValue);
+            Assert.AreEqual(double.NegativeInfinity,_result);
+        }
+        [Test]
+        public void TestMultMinAndMinValue()
+        {
+            _result = Calculator.Multiply(_doubleMinValue, _doubleMinValue);
+            Assert.AreEqual(double.PositiveInfinity, _result);
+        }
+        [Test]
+        public void TestMultTenNegativeAndTwoDotFive()
+        {
+            _result = Calculator.Multiply(_doubleTenNegative, _doubleTwoDotFive);
+            Assert.AreEqual(-25.0,_result);
         }
 
         #endregion
