@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+
+using OpenQA.Selenium;
 
 
 namespace TestFramework.Steps
@@ -6,6 +8,7 @@ namespace TestFramework.Steps
     public class Steps
     {
         IWebDriver driver;
+        Pages.MainPage mainPage;
 
         public void InitBrowser()
         {
@@ -19,9 +22,22 @@ namespace TestFramework.Steps
 
         public void FindDates(string fromAirport, string toAirport)
         {
-            Pages.MainPage mainPage = new Pages.MainPage(driver);
+            mainPage = new Pages.MainPage(driver);
             mainPage.OpenPage();
             mainPage.FindDates(fromAirport, toAirport);
+        }
+
+        public bool GetErrorAirport(string errorMessage)
+        {
+            mainPage = new Pages.MainPage(driver);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            return mainPage.GetErrorAirport(errorMessage);
+        }
+
+        public void SetDates()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.SetDates();
         }
     }
 }

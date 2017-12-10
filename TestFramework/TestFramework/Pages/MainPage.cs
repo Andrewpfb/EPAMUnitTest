@@ -17,6 +17,12 @@ namespace TestFramework.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='calendarClick']")]
         private IWebElement buttonSelectDates;
 
+        [FindsBy(How = How.XPath, Using = ".//*[@id='bookWidgetErrWrapper']/div/div[2]/div/ul/li/button")]
+        private IWebElement divErrorAirport;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderDept']/div/table/tbody")]
+        private IWebElement divCalendar;
+
         private IWebDriver driver;
 
         public MainPage(IWebDriver driver)
@@ -31,11 +37,29 @@ namespace TestFramework.Pages
             System.Console.WriteLine("Main page opened");
         }
 
-        public void FindDates(string fromAirport,string toAirport)
+        public void FindDates(string fromAirport, string toAirport)
         {
             inputFromAirport.SendKeys(fromAirport);
             inputToAirport.SendKeys(toAirport);
             buttonSelectDates.Click();
+        }
+
+        public bool GetErrorAirport(string errorMessage)
+        {
+            return divErrorAirport.Text == errorMessage;
+        }
+
+        public void SetDates()
+        {
+            foreach (var c in divCalendar.FindElements(By.TagName("tr")))
+            {
+               // foreach (var d in c.FindElements(By.TagName("td")))
+              //  {
+                    string tmp = c.Text;
+                    System.Console.WriteLine(tmp);
+               // }
+            }
+
         }
     }
 }

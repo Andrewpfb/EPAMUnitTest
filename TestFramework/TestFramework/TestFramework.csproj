@@ -61,7 +61,6 @@
     <Compile Include="Driver\DriverInstance.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Steps\Steps.cs" />
-    <Compile Include="Tests\SmokeTest.cs" />
     <Compile Include="Tests\SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
