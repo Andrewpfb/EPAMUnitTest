@@ -19,6 +19,7 @@ namespace TestFramework.Driver
             {
                 driver = new FirefoxDriver();
             }
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             return driver;
         }
 

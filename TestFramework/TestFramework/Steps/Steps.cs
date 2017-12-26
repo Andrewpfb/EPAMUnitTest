@@ -1,5 +1,4 @@
 ﻿using System;
-
 using OpenQA.Selenium;
 
 
@@ -30,14 +29,70 @@ namespace TestFramework.Steps
         public bool GetErrorAirport(string errorMessage)
         {
             mainPage = new Pages.MainPage(driver);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             return mainPage.GetErrorAirport(errorMessage);
         }
 
-        public void SetDates()
+        public void SetDateDept()
         {
             mainPage = new Pages.MainPage(driver);
-            mainPage.SetDates();
+            mainPage.SetDateDept();
+        }
+        public void SetDateReturn()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.SetDateReturn();
+        }
+        public void GetMyFlights()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.FindMyFlights();
+        }
+        public bool GetErrorFindMyFlights(string message)
+        {
+            mainPage = new Pages.MainPage(driver);
+            return mainPage.GetErrorFlightNotFound(message);
+        }
+
+        public void SelectEconomyDept()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.SelectEconomDept();
+        }
+
+        public void SelectEconomyReturn()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.SelectEconomReturn();
+        }
+
+        public void ConfirmSelectClass()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.ConfirmSelectClass();
+        }
+
+        public void ConfirmFlightInfo()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.ConfirmFlightInfo();
+        }
+
+        public void ConfirmPassInfo()
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.ConfirmPassInfo();
+        }
+
+        public bool GetErrorEmptyPassInfo(string[] message)
+        {
+            mainPage = new Pages.MainPage(driver);
+            return mainPage.GetErrorEmptyPassInfo(message);
+        }
+
+        public bool GetErrorNotInformation(string message)
+        {
+            mainPage = new Pages.MainPage(driver);
+            return mainPage.GetErrorNotInformation(message);
         }
     }
 }

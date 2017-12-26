@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
 
 namespace TestFramework.Tests
 {
@@ -14,7 +16,28 @@ namespace TestFramework.Tests
         private const string TO_AIRPORT = "London Heathrow, (LHR) GB";
         private const string INVALID_AIRPORT = "New Yorc";
         private const string SECOND_TO_AIRPORT_SOME_CITY = "New York Area Airports, (NYC) US";
+        private const string PASSENGER_TITLE = "Dr";
+        private const string PASSENGER_FIRSTNAME = "James";
+        private const string PASSENGER_LASTNAME = "Wilson";
+        private const string PASSENGER_DAY_OF_BIRTH = "29";
+        private const string PASSENGER_MONTH_OF_BIRTH = "September";
+        private string PASSENGER_YEAR_OF_BIRTH_INVALID = (DateTime.Now.Year - 15).ToString();
+        private string PASSENGER_YEAR_OF_BIRTH_VALID = (DateTime.Now.Year - 25).ToString();
+        private const string PASSENGER_GENDER = "Male";
         private const string MISSING_AIRPORT_ERROR_MESSAGE = "I'm flying From airport";
+        private const string MISSING_ROUTES_ERROR_MESSAGE = "No results were found for your search, please check your route. Try changing your cities, dates or any other search criteria. #101639R";
+        private const string MISSING_INFORMATION_ERROR_MESSAGE = "Oops, looks like some information that we need is missing. Please select a flight to proceed further";
+        private string[] MISSING_INFORMATION_PASSENGER = new string[]
+        {
+            "Oops, looks like some information that we need is missing. Please check the following:",
+            "ADULT ",
+            "Title",
+            "First Name (as per passport)",
+            "Last Name (as per passport)",
+            "Day",
+            "Month",
+            "Year"
+        };
 
         private TestContext testContextInstance;
 
@@ -77,7 +100,55 @@ namespace TestFramework.Tests
         {
             steps.InitBrowser();
             steps.FindDates(FROM_AIRPORT, SECOND_TO_AIRPORT_SOME_CITY);
-            steps.SetDates();
+            steps.SetDateDept();
+            steps.SetDateReturn();
+            steps.GetMyFlights();
+            Assert.IsTrue(steps.GetErrorFindMyFlights(MISSING_ROUTES_ERROR_MESSAGE));
+        }
+
+        [TestMethod]
+        public void TestSelectOneWay()
+        {
+            steps.InitBrowser();
+            steps.FindDates(FROM_AIRPORT, TO_AIRPORT);
+            steps.SetDateDept();
+            steps.SetDateReturn();
+            steps.GetMyFlights();
+            steps.SelectEconomyDept();
+            steps.ConfirmSelectClass();
+            Assert.IsTrue(steps.GetErrorNotInformation(MISSING_INFORMATION_ERROR_MESSAGE));
+        }
+
+        [TestMethod]
+        public void TestPassInfo()
+        {
+            steps.InitBrowser();
+            steps.FindDates(FROM_AIRPORT, TO_AIRPORT);
+            steps.SetDateDept();
+            steps.SetDateReturn();
+            steps.GetMyFlights();
+            steps.SelectEconomyDept();
+            steps.SelectEconomyReturn();
+            steps.ConfirmSelectClass();
+            steps.ConfirmFlightInfo();
+            steps.ConfirmPassInfo();
+            Assert.IsTrue(steps.GetErrorEmptyPassInfo(MISSING_INFORMATION_PASSENGER));
+        }
+
+        [TestMethod]
+        public void TestPassAge()
+        {
+            steps.InitBrowser();
+            steps.FindDates(FROM_AIRPORT, TO_AIRPORT);
+            steps.SetDateDept();
+            steps.SetDateReturn();
+            steps.GetMyFlights();
+            steps.SelectEconomyDept();
+            steps.SelectEconomyReturn();
+            steps.ConfirmSelectClass();
+            steps.ConfirmFlightInfo();
+            steps.ConfirmPassInfo();
+            Assert.IsTrue(steps.GetErrorEmptyPassInfo(MISSING_INFORMATION_PASSENGER));
         }
     }
 }

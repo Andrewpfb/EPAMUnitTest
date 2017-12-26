@@ -15,11 +15,13 @@ namespace SeleniumWebDriver_lw4
         {
             
         firefoxDriver = new FirefoxDriver();
-            firefoxDriver.Navigate().GoToUrl("https://github.com/");
-            firefoxDriver.FindElementByXPath(".//a[text() = 'Sign in']").Click();
-            firefoxDriver.FindElementById("login_field").SendKeys("testautomationuser");
-            firefoxDriver.FindElementById("password").SendKeys("Time4Death!");
-
+            //firefoxDriver.Navigate().GoToUrl("https://github.com/");
+            //firefoxDriver.FindElementByXPath(".//a[text() = 'Sign in']").Click();
+            //firefoxDriver.FindElementById("login_field").SendKeys("testautomationuser");
+            //firefoxDriver.FindElementById("password").SendKeys("Time4Death!");
+            firefoxDriver.Navigate().GoToUrl("https://nordwindairlines.ru");
+            firefoxDriver.FindElementsByClassName("nput__control city-input_departure__control js-location-input")[0].Clear();
+            firefoxDriver.FindElementsByClassName("nput__control city-input_departure__control js-location-input")[0].SendKeys("Минск");
         }
     }
 }
