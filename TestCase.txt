@@ -40,12 +40,8 @@ Year
   Выбрать дату отправления туда (сегодня + 7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
   Выбрать эконом-класс для обеих полетов;
-  Нажать Next, указать год рождения в промежутке сейчас-15 лет
-  Получить уведомление об ошибке:Oops, looks like some information that we need is missing. Please check the following:
-ADULT 
-Day
-Month
-Year
+  Указать дату рождения: дата - 29, месяц - сентябрь, год - текущий-15 лет;
+  Получить уведомление об ошибке под полями: Adult passengers must be above 16 years old on the date of departure
 6)
   Ввести аэропорт отправления: New York, (JFK) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
