@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Threading;
 using TestFramework.Utils;
 
 namespace TestFramework.Pages
@@ -11,29 +11,44 @@ namespace TestFramework.Pages
     {
         private const string BASE_URL = "https://www.virginatlantic.com";
 
+        #region Airports Elements
+
         [FindsBy(How = How.XPath, Using = ".//*[@id='origin']")]
         private IWebElement inputFromAirport;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='destination']")]
         private IWebElement inputToAirport;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='calendarClick']")]
-        private IWebElement buttonSelectDates;
+        #endregion
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='bookWidgetErrWrapper']/div/div[2]/div/ul/li/button")]
-        private IWebElement divErrorAirport;
+        #region Date Elements
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderDept']/div/table/tbody")]
         private IWebElement deptCalendar;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderReturn']/div/table/tbody")]
         private IWebElement returnCalendar;
+        #endregion
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='findFlightsSubmit']")]
-        private IWebElement buttonFindMyFlights;
+        #region Errors Elements
+        [FindsBy(How = How.XPath, Using = ".//*[@id='bookWidgetErrWrapper']/div/div[2]/div/ul/li/button")]
+        private IWebElement divErrorAirport;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='warningFocus']/p")]
         private IWebElement divErrorFlightNotFound;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='tripSummaryError']/div/div[2]/p")]
+        private IWebElement divErrorNotInformation;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='pass_block']/div[1]/div/div[2]")]
+        private IWebElement divErrorPassForm;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='errorContainerWrapper0']")]
+        private IWebElement divErrorInvalidYearOfBirthPassenger;
+
+        #endregion
+
+        #region Buttons
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='fm_rw_0_col_0']")]
         private IWebElement buttonEconomyClass;
@@ -41,17 +56,50 @@ namespace TestFramework.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='tripSummary']")]
         private IWebElement buttonNextStepAfterSelectClass;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='tripSummaryError']/div/div[2]/p")]
-        private IWebElement divErrorNotInformation;
-
         [FindsBy(How = How.XPath, Using = ".//*[@id='ts_submit']")]
         private IWebElement buttonConfirmFlightInfo;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='pass_next']")]
         private IWebElement buttonNextPass;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='pass_block']/div[1]/div/div[2]")]
-        private IWebElement divErrorPassForm;
+        [FindsBy(How = How.XPath, Using = ".//*[@id='calendarClick']")]
+        private IWebElement buttonSelectDates;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderReturn']/div/div/a[2]/span")]
+        private IWebElement buttonReturnCalendarNextMonth;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderDept']/div/div/a[2]/span")]
+        private IWebElement buttonDeptCalendarNextMonth;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='findFlightsSubmit']")]
+        private IWebElement buttonFindMyFlights;
+
+        #endregion
+
+        #region Passenger Elements
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='prefix0']")]
+        private IWebElement selectPassengerTitle;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='firstName0']")]
+        private IWebElement passengerFirstName;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='lastName0']")]
+        private IWebElement passengerLastName;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='day0']")]
+        private IWebElement selectPassengerDayOfBirth;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='month0']")]
+        private IWebElement selectPassengerMonthOfBirth;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='year0']")]
+        private IWebElement selectPassengerYearOfBirth;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='gender10']")]
+        private IWebElement passengerMaleGenderRadio;
+
+        #endregion
 
         private IWebDriver driver;
         private WebDriverWait wait;
@@ -76,30 +124,33 @@ namespace TestFramework.Pages
             buttonSelectDates.Click();
         }
 
-        public bool GetErrorAirport(string errorMessage)
-        {
-            return divErrorAirport.Text == errorMessage;
-        }
-
         public void SetDateDept()
         {
-            string date = (DateTime.Now.AddDays(1)).Day.ToString();
+            if (DateTime.Now.AddDays(7) > DateTime.Now)
+            {
+                buttonDeptCalendarNextMonth.Click();
+            }
+            string date = (DateTime.Now.AddDays(7)).Day.ToString();
             foreach (var c in deptCalendar.FindElements(By.TagName("tr")))
             {
                 foreach (var d in c.FindElements(By.TagName("td")))
                 {
-                        if (d.Text.Contains(date))
-                        {
-                            d.Click();
-                            return;
-                        }
+                    if (d.Text.Contains(date))
+                    {
+                        d.Click();
+                        return;
+                    }
                 }
             }
         }
 
         public void SetDateReturn()
         {
-            string date = (DateTime.Now.AddDays(2)).Day.ToString();
+            if (DateTime.Now.AddDays(7) > DateTime.Now)
+            {
+                buttonReturnCalendarNextMonth.Click();
+            }
+            string date = (DateTime.Now.AddDays(7)).Day.ToString();
             foreach (var c in returnCalendar.FindElements(By.TagName("tr")))
             {
                 foreach (var d in c.FindElements(By.TagName("td")))
@@ -115,13 +166,7 @@ namespace TestFramework.Pages
 
         public void FindMyFlights()
         {
-            WriteFile.Write("SELECTED: " + buttonFindMyFlights.Selected.ToString());
             buttonFindMyFlights.Submit();
-        }
-
-        public bool GetErrorFlightNotFound(string message)
-        {
-            return divErrorFlightNotFound.Text == message;
         }
 
         public void SelectEconomDept()
@@ -148,9 +193,34 @@ namespace TestFramework.Pages
             buttonConfirmFlightInfo.Submit();
         }
 
+        public void SelectInvalidPassengerDateOfBirth(DateTime dateOfBirth)
+        {
+            SelectElement select = new SelectElement(selectPassengerDayOfBirth);
+            select.SelectByText(dateOfBirth.Day.ToString());
+            select = new SelectElement(selectPassengerMonthOfBirth);
+            select.SelectByText(dateOfBirth.ToString("MMMM"));
+            select = new SelectElement(selectPassengerYearOfBirth);
+            select.SelectByText(dateOfBirth.Year.ToString());
+        }
+
+        public void SetPassengerInfo()
+        {
+
+        }
+
         public void ConfirmPassInfo()
         {
             buttonNextPass.Click();
+        }
+
+        public bool GetErrorAirport(string errorMessage)
+        {
+            return divErrorAirport.Text == errorMessage;
+        }
+
+        public bool GetErrorFlightNotFound(string message)
+        {
+            return divErrorFlightNotFound.Text == message;
         }
 
         public bool GetErrorEmptyPassInfo(string[] message)
@@ -181,6 +251,11 @@ namespace TestFramework.Pages
         public bool GetErrorNotInformation(string message)
         {
             return divErrorNotInformation.Text == message;
+        }
+
+        public bool GetErrorInvalidYearOfBirth(string message)
+        {
+            return divErrorInvalidYearOfBirthPassenger.Text == message;
         }
     }
 }

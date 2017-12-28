@@ -26,33 +26,24 @@ namespace TestFramework.Steps
             mainPage.FindDates(fromAirport, toAirport);
         }
 
-        public bool GetErrorAirport(string errorMessage)
-        {
-            mainPage = new Pages.MainPage(driver);
-            return mainPage.GetErrorAirport(errorMessage);
-        }
-
         public void SetDateDept()
         {
             mainPage = new Pages.MainPage(driver);
             mainPage.SetDateDept();
         }
+
         public void SetDateReturn()
         {
             mainPage = new Pages.MainPage(driver);
             mainPage.SetDateReturn();
         }
+
         public void GetMyFlights()
         {
             mainPage = new Pages.MainPage(driver);
             mainPage.FindMyFlights();
         }
-        public bool GetErrorFindMyFlights(string message)
-        {
-            mainPage = new Pages.MainPage(driver);
-            return mainPage.GetErrorFlightNotFound(message);
-        }
-
+        
         public void SelectEconomyDept()
         {
             mainPage = new Pages.MainPage(driver);
@@ -77,10 +68,28 @@ namespace TestFramework.Steps
             mainPage.ConfirmFlightInfo();
         }
 
+        public void SelectInvalidPassengerDateOfBirth(DateTime dateOfBirth)
+        {
+            mainPage = new Pages.MainPage(driver);
+            mainPage.SelectInvalidPassengerDateOfBirth(dateOfBirth);
+        }
+
         public void ConfirmPassInfo()
         {
             mainPage = new Pages.MainPage(driver);
             mainPage.ConfirmPassInfo();
+        }
+
+        public bool GetErrorAirport(string errorMessage)
+        {
+            mainPage = new Pages.MainPage(driver);
+            return mainPage.GetErrorAirport(errorMessage);
+        }
+
+        public bool GetErrorFindMyFlights(string message)
+        {
+            mainPage = new Pages.MainPage(driver);
+            return mainPage.GetErrorFlightNotFound(message);
         }
 
         public bool GetErrorEmptyPassInfo(string[] message)
@@ -93,6 +102,12 @@ namespace TestFramework.Steps
         {
             mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorNotInformation(message);
+        }
+
+        public bool GetErrorInvalidYearOfBirth(string message)
+        {
+            mainPage = new Pages.MainPage(driver);
+            return mainPage.GetErrorInvalidYearOfBirth(message);
         }
     }
 }

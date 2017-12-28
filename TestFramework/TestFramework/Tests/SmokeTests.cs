@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-
+using System.Globalization;
+using System.Threading;
 
 namespace TestFramework.Tests
 {
@@ -12,18 +13,25 @@ namespace TestFramework.Tests
     {
         private static Steps.Steps steps = new Steps.Steps();
 
+        #region Airports info
         private const string FROM_AIRPORT = "New York, (JFK) US";
         private const string TO_AIRPORT = "London Heathrow, (LHR) GB";
         private const string INVALID_AIRPORT = "New Yorc";
         private const string SECOND_TO_AIRPORT_SOME_CITY = "New York Area Airports, (NYC) US";
+        #endregion
+
+        #region Passenger Info
         private const string PASSENGER_TITLE = "Dr";
         private const string PASSENGER_FIRSTNAME = "James";
         private const string PASSENGER_LASTNAME = "Wilson";
-        private const string PASSENGER_DAY_OF_BIRTH = "29";
-        private const string PASSENGER_MONTH_OF_BIRTH = "September";
-        private string PASSENGER_YEAR_OF_BIRTH_INVALID = (DateTime.Now.Year - 15).ToString();
-        private string PASSENGER_YEAR_OF_BIRTH_VALID = (DateTime.Now.Year - 25).ToString();
+        private const int PASSENGER_DAY_OF_BIRTH = 29;
+        private const int PASSENGER_MONTH_OF_BIRTH = 09; //September.
+        private int PASSENGER_YEAR_OF_BIRTH_INVALID = (DateTime.Now.Year - 15);
+        private int PASSENGER_YEAR_OF_BIRTH_VALID = (DateTime.Now.Year - 25);
         private const string PASSENGER_GENDER = "Male";
+        #endregion
+
+        #region Error Message
         private const string MISSING_AIRPORT_ERROR_MESSAGE = "I'm flying From airport";
         private const string MISSING_ROUTES_ERROR_MESSAGE = "No results were found for your search, please check your route. Try changing your cities, dates or any other search criteria. #101639R";
         private const string MISSING_INFORMATION_ERROR_MESSAGE = "Oops, looks like some information that we need is missing. Please select a flight to proceed further";
@@ -38,6 +46,8 @@ namespace TestFramework.Tests
             "Month",
             "Year"
         };
+        private const string INVALID_YEAR_OF_BIRTH = "Adult passengers must be above 16 years old on the date of departure";
+        #endregion
 
         private TestContext testContextInstance;
 
@@ -56,6 +66,7 @@ namespace TestFramework.Tests
         [ClassInitialize]
         public static void Init(TestContext testContext)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             steps.InitBrowser();
         }
 
@@ -147,8 +158,30 @@ namespace TestFramework.Tests
             steps.SelectEconomyReturn();
             steps.ConfirmSelectClass();
             steps.ConfirmFlightInfo();
-            steps.ConfirmPassInfo();
-            Assert.IsTrue(steps.GetErrorEmptyPassInfo(MISSING_INFORMATION_PASSENGER));
+            steps.SelectInvalidPassengerDateOfBirth(new DateTime(
+                    PASSENGER_YEAR_OF_BIRTH_INVALID,
+                    PASSENGER_MONTH_OF_BIRTH,
+                    PASSENGER_DAY_OF_BIRTH));
+            Assert.IsTrue(steps.GetErrorInvalidYearOfBirth(INVALID_YEAR_OF_BIRTH));
+        }
+
+        [TestMethod]
+        public void TestPassCardValidityAge()
+        {
+            steps.InitBrowser();
+            steps.FindDates(FROM_AIRPORT, TO_AIRPORT);
+            steps.SetDateDept();
+            steps.SetDateReturn();
+            steps.GetMyFlights();
+            steps.SelectEconomyDept();
+            steps.SelectEconomyReturn();
+            steps.ConfirmSelectClass();
+            steps.ConfirmFlightInfo();
+            steps.SelectInvalidPassengerDateOfBirth(new DateTime(
+                    PASSENGER_YEAR_OF_BIRTH_VALID,
+                    PASSENGER_MONTH_OF_BIRTH,
+                    PASSENGER_DAY_OF_BIRTH));
+            Assert.IsTrue(steps.GetErrorInvalidYearOfBirth(INVALID_YEAR_OF_BIRTH));
         }
     }
 }

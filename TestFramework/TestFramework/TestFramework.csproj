@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Businnes Objects\Passenger.cs" />
     <Compile Include="Driver\DriverInstance.cs" />
     <Compile Include="Pages\InfoPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
