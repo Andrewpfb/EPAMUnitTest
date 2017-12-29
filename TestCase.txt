@@ -49,12 +49,12 @@ Year
   Выбрать дату отправления обратно (сегодня + 2 дня);
   Выбрать эконом-класс для обеих полетов;
   Заполнить поля данными;
-  На этапе заполнения сведений о банковской карте, ввести срок действия январь текущего года;
-  Продолжить;
-  Получить уведомление об ошибке: Oops, looks like some information that we need is missing. Please check the following:
-PAYMENT DETAILS
-Expiry Month
-Expiry Year
+  В разделе Billing adress заполнить поля так:
+    Country - United States;
+    House name/number - 11301;
+    Zip Code - 90064;
+  Нажать кнопку Find Adress;
+  Получить в окне ниже адрес: #1901, 10390 Wilshire Blvd Apt 1, Los Angeles CA 90024-6400
 7)
   Ввести аэропорт отправления: New York, (JFK) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
