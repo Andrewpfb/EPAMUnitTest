@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
 
-namespace TestFramework.Driver
+namespace NunitTestFramework.Driver
 {
     class DriverInstance
     {
@@ -20,6 +20,7 @@ namespace TestFramework.Driver
                 driver = new FirefoxDriver();
             }
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(30);
             return driver;
         }
 
@@ -27,11 +28,6 @@ namespace TestFramework.Driver
         {
             driver.Quit();
             driver = null;
-
-            foreach (var process in Process.GetProcessesByName("geckodriver"))
-            {
-                process.Kill();
-            }
         }
     }
 }

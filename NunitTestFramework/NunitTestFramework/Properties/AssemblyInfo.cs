@@ -1,16 +1,15 @@
-﻿using System.Resources;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("ExpProject")]
+[assembly: AssemblyTitle("NunitTestFramework")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ExpProject")]
+[assembly: AssemblyProduct("NunitTestFramework")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("9225ddc6-c5c3-4ea2-8c1f-24e0f6a8fbf1")]
+[assembly: Guid("4b1f0e24-9fc2-4887-9bc3-bbc7b2535b33")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //
@@ -35,5 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguage("en")]
-
