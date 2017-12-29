@@ -14,63 +14,76 @@ namespace NunitTestFramework.Steps
             driver = Driver.DriverInstance.GetInstance();
         }
 
+        public void InitMainPage()
+        {
+            mainPage = new Pages.MainPage(driver);
+        }
+
         public void CloseBrowser()
         {
             Driver.DriverInstance.CloseBrowser();
         }
 
-        public void FindDates(string fromAirport, string toAirport)
+        public void SetAirportsAndFindDates(string fromAirport, string toAirport, string typeWay)
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.OpenPage();
-            mainPage.FindDates(fromAirport, toAirport);
+            mainPage.SetFromAirport(fromAirport);
+            mainPage.SetToAirport(toAirport);
+            mainPage.SetTypeWay(typeWay);
+            mainPage.FindDates();
         }
 
-        public void SetDateDept()
+        public void SetPassengersCount(string adultsCount, string childrenCount)
         {
-            mainPage = new Pages.MainPage(driver);
-            mainPage.SetDateDept();
+            mainPage.SetAdultsCount(adultsCount);
+            mainPage.SetChildrenCount(childrenCount);
         }
 
-        public void SetDateReturn()
+        public void SetDateDept(DateTime departmentDate)
         {
-            mainPage = new Pages.MainPage(driver);
-            mainPage.SetDateReturn();
+            if (departmentDate.Year> DateTime.Now.Year || departmentDate.Month > DateTime.Now.Month)
+            {
+                mainPage.SetDeptNextMonth();
+            }
+            mainPage.SetDateDept(departmentDate);
+        }
+
+        public void SetDateReturn(DateTime returnDate, bool returnNextMonth)
+        {
+            if (returnNextMonth)
+            {
+                mainPage.SetReturnNextMonth();
+            }
+            mainPage.SetDateReturn(returnDate);
         }
 
         public void GetMyFlights()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.FindMyFlights();
         }
-        
+
         public void SelectEconomyDept()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.SelectEconomDept();
         }
 
         public void SelectEconomyReturn()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.SelectEconomReturn();
         }
 
         public void ConfirmSelectClass()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.ConfirmSelectClass();
         }
 
         public void ConfirmFlightInfo()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.ConfirmFlightInfo();
         }
 
         public void SelectInvalidPassengerDateOfBirth(DateTime dateOfBirth)
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.SetPassengerDayOfBirth(dateOfBirth.Day.ToString());
             mainPage.SetPassengerMonthOfBirth(dateOfBirth.ToString("MMMM"));
             mainPage.SetPassengerYearOfBirth(dateOfBirth.Year.ToString());
@@ -78,7 +91,6 @@ namespace NunitTestFramework.Steps
 
         public void SetPassengerFullInfo(Businnes_Objects.PassengerInfo passengerInfo)
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.SetPassengerTitle(passengerInfo.Title);
             mainPage.SetPassengerFirstname(passengerInfo.Firstname);
             mainPage.SetPassengerLastname(passengerInfo.Lastname);
@@ -110,67 +122,57 @@ namespace NunitTestFramework.Steps
 
         public bool GetPassengerFullAdress(string fullAdress)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetAdress(fullAdress);
         }
 
         public void ConfirmPassengerAdress()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.ConfirmAdress();
-        }
-
-        public void AgreeTermsAndConditions()
-        {
-            mainPage = new Pages.MainPage(driver);
-            mainPage.AgreeTermsAndCondition();
         }
 
         public void ConfirmPayments()
         {
-            mainPage = new Pages.MainPage(driver);
+            mainPage.AgreeTermsAndCondition();
             mainPage.ConfirmPayments();
         }
 
         public void ConfirmPassInfo()
         {
-            mainPage = new Pages.MainPage(driver);
             mainPage.ConfirmPassInfo();
         }
 
         public bool GetErrorAirport(string errorMessage)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorAirport(errorMessage);
         }
 
         public bool GetErrorFindMyFlights(string message)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorFlightNotFound(message);
+        }
+
+        public bool GetErrorPassengersCount(string message)
+        {
+            return mainPage.GetErrorPassengersCount(message);
         }
 
         public bool GetErrorEmptyPassInfo(string[] message)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorEmptyPassInfo(message);
         }
 
         public bool GetErrorNotInformation(string message)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorNotInformation(message);
         }
 
         public bool GetErrorInvalidYearOfBirth(string message)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorInvalidYearOfBirth(message);
         }
 
         public bool GetErrorInvalidCardNumber(string message)
         {
-            mainPage = new Pages.MainPage(driver);
             return mainPage.GetErrorInvalidCardNumber(message);
         }
     }

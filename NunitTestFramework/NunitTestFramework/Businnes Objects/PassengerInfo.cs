@@ -7,7 +7,7 @@ namespace NunitTestFramework.Businnes_Objects
         public string Title { get; set; } = "Dr";
         public string Firstname { get; set; } = "James";
         public string Lastname { get; set; } = "Wilson";
-        public DateTime DateOfBirth { get; set; } = new DateTime(DateTime.Now.Year-25,09,29);
+        public DateTime DateOfBirth { get; set; } = new DateTime(DateTime.Now.Year - 25, 09, 29);
         public string Gender { get; set; } = "Male";
         public string Email { get; set; } = "JamesWilson@email.com";
         public string PhoneType { get; set; } = "Mobile";
@@ -24,9 +24,9 @@ namespace NunitTestFramework.Businnes_Objects
         public string FullAdress { get; set; } = "#1901, 10390 Wilshire Blvd Apt 1, Los Angeles CA 90024-6400";
 
         public PassengerInfo() { }
-        public PassengerInfo(string title, string firstname, string lastname,DateTime dateOfBirth, string gender,
-            string email, string phoneType, string numberLocal, string contactNumber, 
-            string cardNumber,string firstnameCard, string lastnameCard, DateTime expiryDateCard, string securityCode,
+        public PassengerInfo(string title, string firstname, string lastname, DateTime dateOfBirth, string gender,
+            string email, string phoneType, string numberLocal, string contactNumber,
+            string cardNumber, string firstnameCard, string lastnameCard, DateTime expiryDateCard, string securityCode,
             string country, string houseNameOrNumber, string zipCode, string fullAdress)
         {
             Title = title;

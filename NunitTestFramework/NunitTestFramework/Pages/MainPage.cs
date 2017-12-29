@@ -10,15 +10,28 @@ namespace NunitTestFramework.Pages
     {
         private const string BASE_URL = "https://www.virginatlantic.com";
 
-        
 
-        #region Airports Elements
+
+        #region Route Elements
 
         [FindsBy(How = How.Id, Using = "origin")]
         private IWebElement inputFromAirport;
 
         [FindsBy(How = How.Id, Using = "destination")]
         private IWebElement inputToAirport;
+
+        [FindsBy(How = How.Id, Using = "returndropdown")]
+        private IWebElement selectTypeWay;
+
+        #endregion
+
+        #region Passenger's info Elements
+
+        [FindsBy(How = How.Id, Using = "adult")]
+        private IWebElement selectAdultsCount;
+
+        [FindsBy(How = How.Id, Using = "children")]
+        private IWebElement selectChildrenCount;
 
         #endregion
 
@@ -37,6 +50,9 @@ namespace NunitTestFramework.Pages
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='warningFocus']/p")]
         private IWebElement divErrorFlightNotFound;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetPaxAndPay']/p")]
+        private IWebElement divErrorPassengersCount;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='tripSummaryError']/div/div[2]/p")]
         private IWebElement divErrorNotInformation;
@@ -190,20 +206,27 @@ namespace NunitTestFramework.Pages
             driver.Navigate().GoToUrl(BASE_URL);
         }
 
-        public void FindDates(string fromAirport, string toAirport)
+        public void SetFromAirport(string fromAirport)
         {
             inputFromAirport.SendKeys(fromAirport);
+        }
+        public void SetToAirport(string toAirport)
+        {
             inputToAirport.SendKeys(toAirport);
+        }
+        public void SetTypeWay(string typeWay)
+        {
+            select = new SelectElement(selectTypeWay);
+            select.SelectByText(typeWay);
+        }
+        public void FindDates()
+        {
             buttonSelectDates.Click();
         }
 
-        public void SetDateDept()
+        public void SetDateDept(DateTime departmentDate)
         {
-            if (DateTime.Now.AddDays(7) > DateTime.Now)
-            {
-                buttonDeptCalendarNextMonth.Click();
-            }
-            string date = (DateTime.Now.AddDays(7)).Day.ToString();
+            string date = departmentDate.Day.ToString();
             foreach (var c in deptCalendar.FindElements(By.TagName("tr")))
             {
                 foreach (var d in c.FindElements(By.TagName("td")))
@@ -216,13 +239,13 @@ namespace NunitTestFramework.Pages
                 }
             }
         }
-        public void SetDateReturn()
+        public void SetDeptNextMonth()
         {
-            if (DateTime.Now.AddDays(7) > DateTime.Now)
-            {
-                buttonReturnCalendarNextMonth.Click();
-            }
-            string date = (DateTime.Now.AddDays(7)).Day.ToString();
+            buttonDeptCalendarNextMonth.Click();
+        }
+        public void SetDateReturn(DateTime returnDate)
+        {
+            string date = returnDate.Day.ToString();
             foreach (var c in returnCalendar.FindElements(By.TagName("tr")))
             {
                 foreach (var d in c.FindElements(By.TagName("td")))
@@ -235,6 +258,21 @@ namespace NunitTestFramework.Pages
                 }
             }
         }
+        public void SetReturnNextMonth()
+        {
+            buttonReturnCalendarNextMonth.Click();
+        }
+
+        public void SetAdultsCount(string adultsCount)
+        {
+            select = new SelectElement(selectAdultsCount);
+            select.SelectByText(adultsCount);
+        }
+        public void SetChildrenCount(string childrenCount)
+        {
+            select = new SelectElement(selectChildrenCount);
+            select.SelectByText(childrenCount);
+        }
 
         public void FindMyFlights()
         {
@@ -244,7 +282,6 @@ namespace NunitTestFramework.Pages
         public void SelectEconomDept()
         {
             buttonEconomyClass.Click();
-            //Thread.Sleep(5000);
         }
         public void SelectEconomReturn()
         {
@@ -300,8 +337,8 @@ namespace NunitTestFramework.Pages
             if (gender == "Male")
             {
                 passengerMaleGenderRadio.Click();
-            } 
-            else if(gender == "Female")
+            }
+            else if (gender == "Female")
             {
                 passengerFemaleGenderRadio.Click();
             }
@@ -316,7 +353,7 @@ namespace NunitTestFramework.Pages
         public void SetPassengerEmail(string email)
         {
             int start = DateTime.Now.Second;
-            while(!passengerEmailAdress.Displayed)
+            while (!passengerEmailAdress.Displayed)
             {
                 if (DateTime.Now.Second - start == 30)
                 {
@@ -426,6 +463,10 @@ namespace NunitTestFramework.Pages
         public bool GetErrorFlightNotFound(string message)
         {
             return divErrorFlightNotFound.Text == message;
+        }
+        public bool GetErrorPassengersCount(string message)
+        {
+            return divErrorPassengersCount.Text == message;
         }
         public bool GetErrorEmptyPassInfo(string[] message)
         {
