@@ -1,4 +1,4 @@
-https://www.virginatlantic.com/
+﻿https://www.virginatlantic.com/
 1)
   Ввести аэропорт отправления: New Bern, (EWN) US;
   Ввести аэропорт прибытия: New Yorc;
@@ -71,4 +71,4 @@ Year
   Выбрать One way;
   Выбрать дату отправления (сегодня + 7 дней);
   Выбрать количество взрослых 9 и количество детей 7;
-  Получить уведомление об ошибке: Unfortunately you can't book more than 9 people online. Please call our Customer Service Centre for assistance
+  Получить уведомление об ошибке: There are no reward seats found for your search. You might have better luck looking for a one way reward seat or by changing your dates. #101767R
