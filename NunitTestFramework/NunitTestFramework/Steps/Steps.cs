@@ -1,5 +1,5 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using System;
 
 
 namespace NunitTestFramework.Steps
@@ -32,22 +32,19 @@ namespace NunitTestFramework.Steps
             mainPage.SetTypeWay(typeWay);
             mainPage.FindDates();
         }
-
         public void SetPassengersCount(string adultsCount, string childrenCount)
         {
             mainPage.SetAdultsCount(adultsCount);
             mainPage.SetChildrenCount(childrenCount);
         }
-
         public void SetDateDept(DateTime departmentDate)
         {
-            if (departmentDate.Year> DateTime.Now.Year || departmentDate.Month > DateTime.Now.Month)
+            if (departmentDate.Year > DateTime.Now.Year || departmentDate.Month > DateTime.Now.Month)
             {
                 mainPage.SetDeptNextMonth();
             }
             mainPage.SetDateDept(departmentDate);
         }
-
         public void SetDateReturn(DateTime returnDate, bool returnNextMonth)
         {
             if (returnNextMonth)
@@ -56,27 +53,28 @@ namespace NunitTestFramework.Steps
             }
             mainPage.SetDateReturn(returnDate);
         }
-
         public void GetMyFlights()
         {
             mainPage.FindMyFlights();
+        }
+
+        public bool GetTicketsTable()
+        {
+            return mainPage.GetTicketsTable();
         }
 
         public void SelectEconomyDept()
         {
             mainPage.SelectEconomDept();
         }
-
         public void SelectEconomyReturn()
         {
             mainPage.SelectEconomReturn();
         }
-
         public void ConfirmSelectClass()
         {
             mainPage.ConfirmSelectClass();
         }
-
         public void ConfirmFlightInfo()
         {
             mainPage.ConfirmFlightInfo();
@@ -88,7 +86,10 @@ namespace NunitTestFramework.Steps
             mainPage.SetPassengerMonthOfBirth(dateOfBirth.ToString("MMMM"));
             mainPage.SetPassengerYearOfBirth(dateOfBirth.Year.ToString());
         }
-
+        public void ConfirmPassInfo()
+        {
+            mainPage.ConfirmPassInfo();
+        }
         public void SetPassengerFullInfo(Businnes_Objects.PassengerInfo passengerInfo)
         {
             mainPage.SetPassengerTitle(passengerInfo.Title);
@@ -103,77 +104,67 @@ namespace NunitTestFramework.Steps
             mainPage.SetPassengerEmail(passengerInfo.Email);
             mainPage.ConfirmPassengerEmail(passengerInfo.Email);
             mainPage.SetPassengerPhoneType(passengerInfo.PhoneType);
-            mainPage.SetPassengerPhoneLocale(passengerInfo.NumberLocal);
-            mainPage.SetPassengerPhoneNumber(passengerInfo.ContactNumber);
+            mainPage.SetPassengerPhoneLocale(passengerInfo.PhoneNumberLocal);
+            mainPage.SetPassengerPhoneNumber(passengerInfo.PhoneContactNumber);
             mainPage.ConfirmContactInfo();
 
-            mainPage.SetPassengerCardNumber(passengerInfo.CardNumber);
+            mainPage.SetPassengerCardNumber(passengerInfo.NumberCard);
             mainPage.SetPassengerCardFirstname(passengerInfo.FirstnameCard);
             mainPage.SetPassengerCardLastname(passengerInfo.LastnameCard);
             mainPage.SetPassengerCardMonthExpire(passengerInfo.ExpiryDateCard.ToString("MMM"));
             mainPage.SetPassengerCardYearExpire(passengerInfo.ExpiryDateCard.Year.ToString());
-            mainPage.SetPassengerCardSecurityNumber(passengerInfo.SecurityCode);
+            mainPage.SetPassengerCardSecurityNumber(passengerInfo.SecurityCodeCard);
 
             mainPage.SetPassengerCountry(passengerInfo.Country);
             mainPage.SetPassengerHouseNameOrNumber(passengerInfo.HouseNameOrNumber);
             mainPage.SetPassengerZipCode(passengerInfo.ZipCode);
             mainPage.FindAdress();
         }
-
         public bool GetPassengerFullAdress(string fullAdress)
         {
             return mainPage.GetAdress(fullAdress);
         }
-
         public void ConfirmPassengerAdress()
         {
             mainPage.ConfirmAdress();
         }
-
         public void ConfirmPayments()
         {
             mainPage.AgreeTermsAndCondition();
             mainPage.ConfirmPayments();
         }
 
-        public void ConfirmPassInfo()
-        {
-            mainPage.ConfirmPassInfo();
-        }
+        #region Errors
 
         public bool GetErrorAirport(string errorMessage)
         {
             return mainPage.GetErrorAirport(errorMessage);
         }
-
-        public bool GetErrorFindMyFlights(string message)
-        {
-            return mainPage.GetErrorFlightNotFound(message);
-        }
-
         public bool GetErrorPassengersCount(string message)
         {
             return mainPage.GetErrorPassengersCount(message);
         }
-
-        public bool GetErrorEmptyPassInfo(string[] message)
+        public bool GetErrorFlightNotFound(string message)
         {
-            return mainPage.GetErrorEmptyPassInfo(message);
+            return mainPage.GetErrorFlightNotFound(message);
         }
-
         public bool GetErrorNotInformation(string message)
         {
             return mainPage.GetErrorNotInformation(message);
         }
-
+        public bool GetErrorEmptyPassInfo(string[] message)
+        {
+            return mainPage.GetErrorEmptyPassInfo(message);
+        }
         public bool GetErrorInvalidYearOfBirth(string message)
         {
             return mainPage.GetErrorInvalidYearOfBirth(message);
         }
-
         public bool GetErrorInvalidCardNumber(string message)
         {
             return mainPage.GetErrorInvalidCardNumber(message);
         }
+
+        #endregion
     }
 }

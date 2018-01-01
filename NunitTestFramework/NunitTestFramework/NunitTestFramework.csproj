@@ -59,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\Steps.cs" />
     <Compile Include="Tests\Tests.cs" />
+    <Compile Include="Utils\WaitElements.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Driver Binaries\geckodriver.exe" />

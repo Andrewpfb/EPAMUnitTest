@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using System;
 
 
 namespace NunitTestFramework.Driver
