@@ -13,19 +13,19 @@ namespace NunitTestFramework.Pages
         #region Route Elements
 
         /// <summary>
-        /// Аэропорт отправления.
+        /// Элемент для ввода аэропорта вылета.
         /// </summary>
         [FindsBy(How = How.Id, Using = "origin")]
         private IWebElement inputFromAirport;
 
         /// <summary>
-        /// Аэропорт прибытия.
+        /// Элемент для ввода аэропорта прилета.
         /// </summary>
         [FindsBy(How = How.Id, Using = "destination")]
         private IWebElement inputToAirport;
 
         /// <summary>
-        /// Тип полета. В одну сторону, с возвращением, с пересадками.
+        /// Элемент для выбора типа полета. В одну сторону, с возвращением, с пересадками.
         /// </summary>
         [FindsBy(How = How.Id, Using = "returndropdown")]
         private IWebElement selectTypeWay;
@@ -35,13 +35,13 @@ namespace NunitTestFramework.Pages
         #region Passenger's info Elements
 
         /// <summary>
-        /// Количество взрослых в заказе.
+        /// Элемент для выбора количества взрослых в заказе.
         /// </summary>
         [FindsBy(How = How.Id, Using = "adult")]
         private IWebElement selectAdultsCount;
 
         /// <summary>
-        /// Количество детей в заказе.
+        /// Элемент для выбора количества детей в заказе.
         /// </summary>
         [FindsBy(How = How.Id, Using = "children")]
         private IWebElement selectChildrenCount;
@@ -51,13 +51,13 @@ namespace NunitTestFramework.Pages
         #region Date Elements
 
         /// <summary>
-        /// Календарь для выбора даты вылета.
+        /// Элемент (календарь) для выбора даты вылета.
         /// </summary>
         [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderDept']/div/table/tbody")]
         private IWebElement deptCalendar;
 
         /// <summary>
-        /// Календарь для выбора даты прилета.
+        /// Элемент (календарь) для выбора даты прилета.
         /// </summary>
         [FindsBy(How = How.XPath, Using = ".//*[@id='bookingWidgetCalenderReturn']/div/table/tbody")]
         private IWebElement returnCalendar;
@@ -84,7 +84,7 @@ namespace NunitTestFramework.Pages
         private IWebElement divErrorFlightNotFound;
 
         /// <summary>
-        /// Элемент, отображающий ошибку о неполной информации о полете (напрмер не выбран класс билета для возвращения).
+        /// Элемент, отображающий ошибку о неполной информации о полете (например не выбран класс билета для возвращения).
         /// </summary>
         [FindsBy(How = How.XPath, Using = ".//*[@id='tripSummaryError']/div/div[2]/p")]
         private IWebElement divErrorNotInformation;
