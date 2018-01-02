@@ -13,6 +13,12 @@ namespace NunitTestFramework.Pages
         #region Route Elements
 
         /// <summary>
+        /// Элемент для выбора параметров полета из ранее сделанного заказа.
+        /// </summary>
+        [FindsBy(How = How.Id, Using = "preferenceItinId")]
+        private IWebElement selectRecentSearch;
+
+        /// <summary>
         /// Элемент для ввода аэропорта вылета.
         /// </summary>
         [FindsBy(How = How.Id, Using = "origin")]
@@ -110,6 +116,12 @@ namespace NunitTestFramework.Pages
         #endregion
 
         #region Buttons
+
+        /// <summary>
+        /// Кнопка для открытия главной страницы.
+        /// </summary>
+        [FindsBy(How = How.ClassName, Using = "virginAtlanticLogo")]
+        private IWebElement buttonGoToMain;
 
         /// <summary>
         /// Кнопка для отображения календаря для выбора дат.
@@ -346,12 +358,31 @@ namespace NunitTestFramework.Pages
             this.driver = driver;
             PageFactory.InitElements(this.driver, this);
         }
-
         public void OpenPage()
         {
             driver.Navigate().GoToUrl(BaseUrl);
         }
 
+        public bool SearchOrderInRecentSearch(string recentSearchString)
+        {
+            try
+            {
+                Utils.WaitElements.WaitShowElement(By.Id("preferenceItinId"), driver);
+            }
+            catch
+            {
+                throw new Exception("Element not found");
+            }
+            select = new SelectElement(selectRecentSearch);
+            foreach (var option in select.Options)
+            {
+                if (option.Text == recentSearchString)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void SetFromAirport(string fromAirport)
         {
             inputFromAirport.SendKeys(fromAirport);

@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 
+
 namespace NunitTestFramework.Tests
 {
     [TestFixture]
@@ -13,6 +14,7 @@ namespace NunitTestFramework.Tests
         private static bool ReturnNextMonth;
 
         #region Airports info
+        private const string RecentSearchCity = "JFK to LHR";
         private const string FromAirport = "New York, (JFK) US";
         private const string ToAirport = "London Heathrow, (LHR) GB";
         private const string InvalidAirport = "New Yorc";
@@ -84,7 +86,7 @@ namespace NunitTestFramework.Tests
         }
 
         [Test]
-        public void TestInvalidPlace()
+        public void TestFlightToSameCity()
         {
             steps.SetAirportsAndFindDates(FromAirport, SecondToAirportSomeCity, Return);
             steps.SetDateDept(DepartmentDate);
@@ -94,14 +96,13 @@ namespace NunitTestFramework.Tests
         }
 
         [Test]
-        public void TestCountOfPassenger()
+        public void TestGetTicketsTable()
         {
             steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
             steps.SetDateDept(DepartmentDate);
             steps.SetDateReturn(ReturnDate, ReturnNextMonth);
-            steps.SetPassengersCount(AdultsCount, ChildrenCount);
             steps.GetMyFlights();
-            Assert.IsTrue(steps.GetErrorFlightNotFound(InvalidCountsOfPassengers));
+            Assert.IsTrue(steps.GetTicketsTable());
         }
 
         [Test]
@@ -117,17 +118,7 @@ namespace NunitTestFramework.Tests
         }
 
         [Test]
-        public void TestGetTicketsTable()
-        {
-            steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
-            steps.SetDateDept(DepartmentDate);
-            steps.SetDateReturn(ReturnDate, ReturnNextMonth);
-            steps.GetMyFlights();
-            Assert.IsTrue(steps.GetTicketsTable());
-        }
-
-        [Test]
-        public void TestPassInfo()
+        public void TestMissingPassengerInfo()
         {
             steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
             steps.SetDateDept(DepartmentDate);
@@ -142,7 +133,7 @@ namespace NunitTestFramework.Tests
         }
 
         [Test]
-        public void TestPassAge()
+        public void TestPassengerAge()
         {
             steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
             steps.SetDateDept(DepartmentDate);
@@ -158,7 +149,7 @@ namespace NunitTestFramework.Tests
         }
 
         [Test]
-        public void TestPassFindAdress()
+        public void TestPassengerFindAdress()
         {
             steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
             steps.SetDateDept(DepartmentDate);
@@ -173,7 +164,7 @@ namespace NunitTestFramework.Tests
         }
 
         [Test]
-        public void TestPassInvalidCardNumber()
+        public void TestPassengerInvalidCardNumber()
         {
             steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
             steps.SetDateDept(DepartmentDate);
@@ -187,6 +178,28 @@ namespace NunitTestFramework.Tests
             steps.ConfirmPassengerAdress();
             steps.ConfirmPayments();
             Assert.IsTrue(steps.GetErrorInvalidCardNumber(InvalidCardNumberMessage));
+        }
+
+        [Test]
+        public void TestCountOfPassenger()
+        {
+            steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
+            steps.SetDateDept(DepartmentDate);
+            steps.SetDateReturn(ReturnDate, ReturnNextMonth);
+            steps.SetPassengersCount(AdultsCount, ChildrenCount);
+            steps.GetMyFlights();
+            Assert.IsTrue(steps.GetErrorFlightNotFound(InvalidCountsOfPassengers));
+        }
+
+        [Test]
+        public void TestRecentSearch()
+        {
+            steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
+            steps.SetDateDept(DepartmentDate);
+            steps.SetDateReturn(ReturnDate, ReturnNextMonth);
+            steps.GetMyFlights();
+            steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
+            Assert.IsTrue(steps.SearchOrderInRecentSearch(RecentSearchCity, DepartmentDate, ReturnDate));
         }
     }
 }

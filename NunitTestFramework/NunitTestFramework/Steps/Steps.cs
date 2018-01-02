@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Text;
 
 
 namespace NunitTestFramework.Steps
@@ -24,6 +25,20 @@ namespace NunitTestFramework.Steps
             Driver.DriverInstance.CloseBrowser();
         }
 
+        public bool SearchOrderInRecentSearch(string recentSearchCity, DateTime departmentDate, DateTime returnDate)
+        {
+            StringBuilder recentSearchString = new StringBuilder(recentSearchCity);
+            recentSearchString.Append(" [");
+            recentSearchString.Append(departmentDate.ToString("MMM"));
+            recentSearchString.Append(' ');
+            recentSearchString.Append(departmentDate.ToString("dd"));
+            recentSearchString.Append(" - ");
+            recentSearchString.Append(returnDate.ToString("MMM"));
+            recentSearchString.Append(' ');
+            recentSearchString.Append(returnDate.ToString("dd"));
+            recentSearchString.Append(']');
+            return mainPage.SearchOrderInRecentSearch(recentSearchString.ToString());
+        }
         public void SetAirportsAndFindDates(string fromAirport, string toAirport, string typeWay)
         {
             mainPage.OpenPage();

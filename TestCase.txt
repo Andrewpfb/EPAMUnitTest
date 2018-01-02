@@ -1,34 +1,43 @@
 ﻿https://www.virginatlantic.com/
-1)
+1) TestInvalidAirport
   Ввести аэропорт отправления: New Bern, (EWN) US;
   Ввести аэропорт прибытия: New Yorc;
+  Нажать Select Dates;
   Получить уведомление о ошибке: Oops, looks like some information that we need is missing. Please check the following:
 I'm flying To airport;
-2)
+2) TestFlightToSameCity
   Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: New York, (JFK) US;
+  Нажать Select Dates;
   Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Получить уведомление об отсутствии маршрута на дату: No results were found for your search, please check your route. Try changing your cities, dates or any other search criteria. #101639R.;
-3)
-  Ввести аэропорт отправления: New York, (JFK) US;
+3) TestGetTicketsTable
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать дату отправления туда (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Получить таблицу с выбором билетов.
-4)
-  Ввести аэропорт отправления: New York, (JFK) US;
+4) TestSelectOneWay
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать дату отправления туда (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Выбрать эконом-класс для полета туда;
   Продолжить оформление;
   Получить уведомление об ошибке:Oops, looks like some information that we need is missing. Please select a flight to proceed further;
-5)
-  Ввести аэропорт отправления: New York, (JFK) US;
+5) TestMissingPassengerInfo
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать дату отправления туда (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Выбрать эконом-класс для обеих полетов;
   Нажать Next не заполнив поля;
   Получить уведомление об ошибке: 
@@ -40,19 +49,23 @@ Last Name (as per passport)
 Day
 Month
 Year
-6)
-  Ввести аэропорт отправления: New York, (JFK) US;
+6) TestPassengerAge
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать дату отправления туда (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Выбрать эконом-класс для обеих полетов;
   Указать дату рождения: дата - 29, месяц - сентябрь, год - текущий-15 лет;
   Получить уведомление об ошибке под полями: Adult passengers must be above 16 years old on the date of departure
-7)
-  Ввести аэропорт отправления: New York, (JFK) US;
+7) TestPassengerFindAdress
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать дату отправления туда (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Выбрать эконом-класс для обеих полетов;
   Заполнить поля данными;
   В разделе Billing adress заполнить поля так:
@@ -61,20 +74,33 @@ Year
     Zip Code - 90064;
   Нажать кнопку Find Adress;
   Получить в окне ниже адрес: #1901, 10390 Wilshire Blvd Apt 1, Los Angeles CA 90024-6400
-8)
-  Ввести аэропорт отправления: New York, (JFK) US;
+8) TestPassengerInvalidCardNumber
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать дату отправления туда (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
   Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Выбрать эконом-класс для обеих полетов;
   Заполнить поля данными;
   На этапе заполнения сведений о банковской карте, ввести номер карты 5345123111123453;
   Продолжить;
   Получить уведомление об ошибке в разделе Payment: Your card number doesn't seem to be correct. #4042R
-9)
-  Ввести аэропорт отправления: New York, (JFK) US;
+9) TestCountOfPassenger
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
   Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
-  Выбрать One way;
-  Выбрать дату отправления (сегодня + 7 дней);
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
+  Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
   Выбрать количество взрослых 9 и количество детей 7;
   Получить уведомление об ошибке: There are no reward seats found for your search. You might have better luck looking for a one way reward seat or by changing your dates. #101767R
+10) TestRecentSearch
+  Ввести аэропорт отправления: New York Area Airports, (NYC) US;
+  Ввести аэропорт прибытия: London Heathrow, (LHR) GB;
+  Нажать Select Dates;
+  Выбрать дату туда (сегодня+7 дней);
+  Выбрать дату отправления обратно (сегодня + 2 дня);
+  Нажать Find my Flights;
+  Вернуться на главную страницу
+  Получить в выпадающем списке Recent Searches строку следующего вида:JFK to LHR [месяц и день вылета - месяц и день прилета] (пример строки: JFK to LHR [Jan 05 - Jan 06])
