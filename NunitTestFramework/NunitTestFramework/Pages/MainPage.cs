@@ -527,16 +527,13 @@ namespace NunitTestFramework.Pages
             select = new SelectElement(selectPassengerYearOfBirth);
             select.SelectByText(year);
         }
-        public void SetPassengerGender(string gender)
+        public void SetPassengerGenderMale()
         {
-            if (gender == "Male")
-            {
-                passengerMaleGenderRadio.Click();
-            }
-            else if (gender == "Female")
-            {
+            passengerMaleGenderRadio.Click();
+        }
+        public void SetPassengerGenderFemale()
+        {
                 passengerFemaleGenderRadio.Click();
-            }
         }
         public void ConfirmPassInfo()
         {

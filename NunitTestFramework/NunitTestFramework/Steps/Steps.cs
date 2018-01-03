@@ -113,7 +113,14 @@ namespace NunitTestFramework.Steps
             mainPage.SetPassengerDayOfBirth(passengerInfo.DateOfBirth.Day.ToString());
             mainPage.SetPassengerMonthOfBirth(passengerInfo.DateOfBirth.ToString("MMMM"));
             mainPage.SetPassengerYearOfBirth(passengerInfo.DateOfBirth.Year.ToString());
-            mainPage.SetPassengerGender(passengerInfo.Gender);
+            if (passengerInfo.Gender == "Male")
+            {
+                mainPage.SetPassengerGenderMale();
+            }
+            else if(passengerInfo.Gender == "Female")
+            {
+                mainPage.SetPassengerGenderFemale();
+            }
             mainPage.ConfirmPassInfo();
 
             mainPage.SetPassengerEmail(passengerInfo.Email);
