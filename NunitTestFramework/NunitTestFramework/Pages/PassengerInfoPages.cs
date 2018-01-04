@@ -4,6 +4,9 @@ using OpenQA.Selenium.Support.UI;
 
 namespace NunitTestFramework.Pages
 {
+    /// <summary>
+    /// Класс страницы, где заполняется информация о пассажирах.
+    /// </summary>
     public class PassengerInfoPages
     {
         #region Passenger Elements
@@ -261,14 +264,6 @@ namespace NunitTestFramework.Pages
         #region Contact Information
         public void SetPassengerEmail(string email)
         {
-            //int start = DateTime.Now.Second;
-            //while (!passengerEmailAdress.Displayed)
-            //{
-            //    if (DateTime.Now.Second - start == 30)
-            //    {
-            //        throw new Exception("Timeout");
-            //    }
-            //}
             Utils.WaitElements.WaitShowElement(By.Id("email"), driver);
             passengerEmailAdress.SendKeys(email);
         }

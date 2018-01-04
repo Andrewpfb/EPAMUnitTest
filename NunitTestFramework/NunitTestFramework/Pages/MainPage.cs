@@ -5,6 +5,9 @@ using System;
 
 namespace NunitTestFramework.Pages
 {
+    /// <summary>
+    /// Класс главной страницы сайта.
+    /// </summary>
     public class MainPage
     {
         private const string BaseUrl = "https://www.virginatlantic.com";

@@ -3,6 +3,9 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace NunitTestFramework.Pages
 {
+    /// <summary>
+    /// Класс страницы подтверждения информации о полете.
+    /// </summary>
     public class ConfirmTripSummaryPage
     {
         #region Buttons

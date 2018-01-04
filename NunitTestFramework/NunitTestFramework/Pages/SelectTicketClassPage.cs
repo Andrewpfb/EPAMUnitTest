@@ -3,6 +3,9 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace NunitTestFramework.Pages
 {
+    /// <summary>
+    /// Класс страницы для выбора класса билета\билетов.
+    /// </summary>
     public class SelectTicketClassPage
     {
         #region Buttons
@@ -48,12 +51,13 @@ namespace NunitTestFramework.Pages
             }
             catch
             {
-                return false;
+                throw new System.Exception("Element not found");
             }
         }
         public void SelectEconomDept()
         {
             buttonEconomyClass.Click();
+            //Ожидаем появления и исчезания окна прогресса.
             Utils.WaitElements.WaitShowElement(By.CssSelector("#dialog2>div"), driver);
             Utils.WaitElements.WaitHideElement(By.CssSelector("#dialog2>div"), driver);
         }
