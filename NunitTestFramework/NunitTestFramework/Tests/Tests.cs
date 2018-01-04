@@ -198,7 +198,7 @@ namespace NunitTestFramework.Tests
             steps.SetDateDept(DepartmentDate);
             steps.SetDateReturn(ReturnDate, ReturnNextMonth);
             steps.GetMyFlights();
-            steps.SetAirportsAndFindDates(FromAirport, ToAirport, Return);
+            steps.OpenMainPage();
             Assert.IsTrue(steps.SearchOrderInRecentSearch(RecentSearchCity, DepartmentDate, ReturnDate));
         }
     }
