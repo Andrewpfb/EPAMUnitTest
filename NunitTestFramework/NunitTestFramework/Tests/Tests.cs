@@ -36,9 +36,8 @@ namespace NunitTestFramework.Tests
         private static DateTime ReturnDate = DateTime.Now.AddDays(8);
 
         private const int PassengerDayOfBirth = 29;
-        private const int PassegerMothOfBirth = 09; //September.
+        private const int PassengerMonthOfBirth = 09; //September.
         private int PassengerYearOfBirthInvalid = (DateTime.Now.Year - 15);
-        private int PassengerYearOfBirthValid = (DateTime.Now.Year - 25);
         #endregion
 
         #region Error Message
@@ -143,8 +142,9 @@ namespace NunitTestFramework.Tests
             steps.SelectEconomyReturn();
             steps.ConfirmSelectClass();
             steps.ConfirmFlightInfo();
-            passenger.DateOfBirth = new DateTime(PassengerYearOfBirthInvalid, PassegerMothOfBirth, PassengerDayOfBirth);
-            steps.SelectInvalidPassengerDateOfBirth(passenger.DateOfBirth);
+            steps.SelectInvalidPassengerDateOfBirth(
+                new DateTime(PassengerYearOfBirthInvalid, PassengerMonthOfBirth, PassengerDayOfBirth)
+                );
             Assert.IsTrue(steps.GetErrorInvalidYearOfBirth(InvalidYearOfBirthErrorMessage));
         }
 
