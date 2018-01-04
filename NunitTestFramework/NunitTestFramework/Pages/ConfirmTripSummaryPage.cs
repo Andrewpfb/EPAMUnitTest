@@ -6,7 +6,7 @@ namespace NunitTestFramework.Pages
     /// <summary>
     /// Класс страницы подтверждения информации о полете.
     /// </summary>
-    public class ConfirmTripSummaryPage
+    public class ConfirmTripSummaryPage : BasePage
     {
         #region Buttons
 
@@ -20,10 +20,9 @@ namespace NunitTestFramework.Pages
 
         private IWebDriver driver;
 
-        public ConfirmTripSummaryPage(IWebDriver driver)
+        public ConfirmTripSummaryPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(this.driver, this);
         }
 
         public PassengerInfoPages ConfirmFlightInfo()

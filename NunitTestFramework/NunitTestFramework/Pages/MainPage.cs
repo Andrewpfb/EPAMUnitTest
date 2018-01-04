@@ -8,7 +8,7 @@ namespace NunitTestFramework.Pages
     /// <summary>
     /// Класс главной страницы сайта.
     /// </summary>
-    public class MainPage
+    public class MainPage : BasePage
     {
         private const string BaseUrl = "https://www.virginatlantic.com";
 
@@ -130,10 +130,9 @@ namespace NunitTestFramework.Pages
         private IWebDriver driver;
         private SelectElement select;
 
-        public MainPage(IWebDriver driver)
+        public MainPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(this.driver, this);
         }
 
         public void OpenPage()

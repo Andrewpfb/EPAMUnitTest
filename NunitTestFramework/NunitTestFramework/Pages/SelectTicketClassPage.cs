@@ -6,7 +6,7 @@ namespace NunitTestFramework.Pages
     /// <summary>
     /// Класс страницы для выбора класса билета\билетов.
     /// </summary>
-    public class SelectTicketClassPage
+    public class SelectTicketClassPage : BasePage
     {
         #region Buttons
 
@@ -36,10 +36,9 @@ namespace NunitTestFramework.Pages
 
         private IWebDriver driver;
 
-        public SelectTicketClassPage(IWebDriver driver)
+        public SelectTicketClassPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(this.driver, this);
         }
 
         public bool GetTicketsTable()

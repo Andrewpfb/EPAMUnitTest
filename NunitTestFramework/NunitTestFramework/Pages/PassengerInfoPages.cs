@@ -7,7 +7,7 @@ namespace NunitTestFramework.Pages
     /// <summary>
     /// Класс страницы, где заполняется информация о пассажирах.
     /// </summary>
-    public class PassengerInfoPages
+    public class PassengerInfoPages : BasePage
     {
         #region Passenger Elements
 
@@ -210,10 +210,9 @@ namespace NunitTestFramework.Pages
         private IWebDriver driver;
         private SelectElement select;
 
-        public PassengerInfoPages(IWebDriver driver)
+        public PassengerInfoPages(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(this.driver, this);
         }
 
         #region SetPassengerInfo
